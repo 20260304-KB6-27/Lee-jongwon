@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        margin-top: 50px;
+        margin-left: 50px;
+      }
+
+      /*
+      position fixed : 고정 레이아웃
+
+      특징
+      - 스크롤을 내려도 화면의 특정 위치에 고정
+      - 일반적인 문서 흐름에서 제외되어 다른 요소들의 위치를 무시함
+      */
+      .top_bar {
+        background-color: red;
+        height: 50px;
+        top: 0;
+        left: 0;
+        right: 0;
+        position: fixed;
+      }
+
+      .left_bar {
+        background-color: blue;
+        width: 50px;
+        position: fixed;
+        top: 50px;
+        bottom: 0;
+        left: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top_bar"></div>
+    <div class="left_bar"></div>
+    <div class="container">
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam officia
+        ullam totam labore molestiae dignissimos fugit, distinctio velit
+        praesentium laboriosam, esse quod! Blanditiis quidem esse explicabo
+        eligendi deserunt laboriosam dolorem inventore dolor, rerum eum
+        recusandae perspiciatis alias dignissimos sit dolores? Temporibus rerum
+        quas eveniet obcaecati delectus, odio perspiciatis iure commodi
+        veritatis unde corporis beatae similique labore voluptas aspernatur eum
+        ut odit quidem eligendi possimus deserunt quis facilis fuga? Aliquam
+        doloremque odio assumenda perferendis mollitia. Quo enim, aliquam nisi
+        ad neque incidunt voluptas ut commodi, amet sequi aut quam facere
+        soluta, ipsam asperiores impedit earum saepe rem. Esse accusantium
+        consectetur natus!
+      </p>
+
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam officia
+        ullam totam labore molestiae dignissimos fugit, distinctio velit
+        praesentium laboriosam, esse quod! Blanditiis quidem esse explicabo
+        eligendi deserunt laboriosam dolorem inventore dolor, rerum eum
+        recusandae perspiciatis alias dignissimos sit dolores? Temporibus rerum
+        quas eveniet obcaecati delectus, odio perspiciatis iure commodi
+        veritatis unde corporis beatae similique labore voluptas aspernatur eum
+        ut odit quidem eligendi possimus deserunt quis facilis fuga? Aliquam
+        doloremque odio assumenda perferendis mollitia. Quo enim, aliquam nisi
+        ad neque incidunt voluptas ut commodi, amet sequi aut quam facere
+        soluta, ipsam asperiores impedit earum saepe rem. Esse accusantium
+        consectetur natus!
+      </p>
+    </div>
+  </body>
+</html>
