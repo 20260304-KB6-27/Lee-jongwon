@@ -1,0 +1,21 @@
+//const fs = require('fs').promises;
+const fs = require('fs/promises');
+
+// fs.readdir('./')
+//   .then((files) => {
+//     console.log(files);
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
+
+async function readDir() {
+  try {
+    const files = await fs.readdir('./');
+    console.log(files);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+readDir();
