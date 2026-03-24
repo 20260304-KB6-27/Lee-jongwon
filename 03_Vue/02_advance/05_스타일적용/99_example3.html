@@ -41,11 +41,33 @@
 
           <!-- 아래의 div를 완성하세요 -->
           <div v-if="selectedPostNo === post.no" class="post-content">
-            <h2>{{ post.title }}</h2>
-            <p>{{ post.content }}</p>
-            <button @click="closePost">닫기</button>
-            <button @click="editPost">수정</button>
-            <button @click="deletePost(post.no)">삭제</button>
+            <div v-if="editMode === post.no">
+              <input
+                type="text"
+                v-model="editTitle"
+                style="
+                  width: 100%;
+                  box-sizing: border-box;
+                  margin-bottom: 5px;
+                  padding: 5px;
+                "
+              />
+              <textarea
+                v-model="editContent"
+                style="width: 100%; box-sizing: border-box; padding: 5px"
+                rows="3"
+              ></textarea>
+              <button @click="savePost(post.no)">저장</button>
+              <button @click="cancelPost">취소</button>
+            </div>
+
+            <div v-else>
+              <h2>{{ post.title }}</h2>
+              <p>{{ post.content }}</p>
+              <button @click="closePost">닫기</button>
+              <button @click="editPost(post)">수정</button>
+              <button @click="deletePost(post.no)">삭제</button>
+            </div>
           </div>
         </li>
       </ul>
@@ -59,6 +81,9 @@
         setup() {
           const newtitle = ref('');
           const newcontent = ref('');
+          const editMode = ref(''); // view / edit
+          const editTitle = ref('');
+          const editContent = ref('');
 
           const posts = ref([
             {
@@ -139,7 +164,26 @@
             selectedPostNo.value = null;
           };
 
-          const editPost = () => {};
+          const editPost = (post) => {
+            editMode.value = post.no;
+            editTitle.value = post.title;
+            editContent.value = post.content;
+          };
+          const cancelPost = () => {
+            editMode.value = null;
+          };
+
+          const savePost = (no) => {
+            if (editTitle.value === '' || editContent.value === '') return;
+
+            let index = posts.value.findIndex((item) => no === item.no);
+
+            if (index !== -1) {
+              posts.value[index].title = editTitle.value;
+              posts.value[index].content = editContent.value;
+              editMode.value = null;
+            }
+          };
 
           const deletePost = (no) => {
             let index = posts.value.findIndex((item) => no === item.no);
@@ -175,6 +219,11 @@
             editPost,
             deletePost,
             sortedPosts,
+            editMode,
+            editTitle,
+            editContent,
+            savePost,
+            cancelPost,
           };
         },
       }).mount('#app');

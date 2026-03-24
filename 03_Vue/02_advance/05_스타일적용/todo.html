@@ -26,7 +26,7 @@
         <li
           v-for="todoitem in todolist"
           :key="todoitem.id"
-          @click="toggleComlted(todoitem.id)"
+          @click="toggleCompleted(todoitem.id)"
         >
           <span
             :style="{textDecoration: todoitem.completed ? 'line-through': 'none'}"
@@ -64,7 +64,7 @@
           };
 
           //완료상태 토글 기능
-          const toggleComlted = (id) => {
+          const toggleCompleted = (id) => {
             //findIndex(콜백) : 콜백함수가 true를 반환하는 첫번째 요소의 인덱스를 반환
             let index = todolist.value.findIndex((item) => id === item.id);
 
@@ -95,7 +95,7 @@
             todo.value = '';
           };
 
-          return { todolist, deleteTodo, addTodo, todo, toggleComlted };
+          return { todolist, deleteTodo, addTodo, todo, toggleCompleted };
         },
       }).mount('#app');
     </script>
