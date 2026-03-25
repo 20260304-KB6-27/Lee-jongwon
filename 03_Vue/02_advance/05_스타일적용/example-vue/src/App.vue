@@ -1,15 +1,25 @@
 <template>
   <h1>📌 게시판 목록 v2</h1>
 
-  <InputPost @add="addPost"></InputPost>
+  <InputPost :posts="posts" @add="addPost"></InputPost>
 
-  <PostList></PostList>
+  <PostList
+    :posts="sortedPosts"
+    @delete="deletePost"
+    @edit="editPost"
+    @toggle="togglePost"
+    @save="savePost"
+    @cancel="cancelPost"
+    @close="closePost"
+    @add="addPost"
+    :selectedPostNo="selectedPostNo"
+  ></PostList>
 </template>
 
 <script setup>
 import InputPost from './components/InputPost.vue';
 import PostList from './components/PostList.vue';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
 const posts = ref([
   {
@@ -72,8 +82,51 @@ const posts = ref([
   },
 ]);
 
+const selectedPostNo = ref(null);
+
+const sortedPosts = computed(() => {
+  return [...posts.value].sort((a, b) => b.no - a.no);
+});
+
 const addPost = (newPost) => {
   posts.value.push(newPost);
+};
+
+const deletePost = (no) => {
+  let index = posts.value.findIndex((item) => no === item.no);
+
+  if (index !== -1) {
+    alert('정말로 삭제하시겠습니까?');
+    posts.value.splice(index, 1);
+  }
+};
+
+const editPost = (post) => {
+  let index = posts.value.findIndex((item) => post.no === item.no);
+  posts.value[index].title = post.title;
+  posts.value[index].content = post.content;
+};
+
+const togglePost = (no) => {
+  selectedPostNo.value = selectedPostNo.value === no ? null : no;
+};
+
+const savePost = (editData) => {
+  let index = posts.value.findIndex((item) => editData.no === item.no);
+
+  if (index !== -1) {
+    posts.value[index].title = editData.title;
+    posts.value[index].content = editData.content;
+  }
+};
+const cancelPost = () => {
+  posts.value.forEach((item) => {
+    item.selected = false;
+  });
+};
+
+const closePost = () => {
+  selectedPostNo.value = null;
 };
 </script>
 

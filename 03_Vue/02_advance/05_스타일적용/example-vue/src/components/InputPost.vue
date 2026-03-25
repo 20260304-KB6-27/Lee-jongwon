@@ -17,16 +17,19 @@
 <script setup>
 import { ref } from 'vue';
 
-const newtitle = ref('');
-const newcontent = ref('');
+const props = defineProps({
+  posts: Array,
+});
 
 const emit = defineEmits(['add']);
+const newtitle = ref('');
+const newcontent = ref('');
 
 const addPost = () => {
   if (newtitle.value === '' || newcontent.value === '') return;
 
   emit('add', {
-    no: posts.value.length + 1,
+    no: props.posts.length + 1,
     title: newtitle.value,
     content: newcontent.value,
   });
