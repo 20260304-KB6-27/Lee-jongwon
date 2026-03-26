@@ -10,9 +10,9 @@
 </template>
 
 <script setup>
-const props = defineProps(['id', 'checked', 'label']);
+const props = defineProps(['id', 'checked', 'label']); //부모에게서 받아오는거
 
-const emit = defineEmits(['check-changed']);
+const emit = defineEmits(['check-changed']); //부모로 보내는거
 
 function onChange(event) {
   emit('check-changed', { id: props.id, checked: event.target.checked });
